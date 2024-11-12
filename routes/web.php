@@ -21,7 +21,7 @@ Route::get('/login', [AuthController::class, 'formularioLogin'])->name('login');
 
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 /*--------*/
 Route::get('/products',[ProductController::class, 'index'])->name('products.index');
