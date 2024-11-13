@@ -11,15 +11,15 @@ use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
-    public function formularioRegistro() {
-        return view('auth.registro');
+    public function showRegisterForm() {
+        return view('auth.register');
     }
 
-    public function registro(Request $request) {
+    public function register(Request $request) {
         //validad los datos del formulario
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:100',
-            'email' => 'required|string|email|max:100|unique:usuarios',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:usuarios',
             'password' => 'required|string|min:8|confirmed'
         ]);
 
@@ -37,7 +37,7 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Registro exitoso. Por favor, inicia sesión.');
     }
 
-    public function formularioLogin() {
+    public function showLoginForm() {
         return view('auth.login');
     }
 
@@ -57,7 +57,6 @@ class AuthController extends Controller
     }
     //Cerrar sesión
     public function logout() { 
-        Session::flush();
         Auth::logout();
         return redirect()->route('login')->with('success', 'Has cerrado sesión.');
     }
